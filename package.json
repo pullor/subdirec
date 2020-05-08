@@ -1,0 +1,21 @@
+{
+  "name": "subdirec",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "core"
+  ],
+  "bin": {
+    "subdirec": "core/subdir.js"
+  },
+  "author": "asd_email@163.com",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "inquirer": "^7.1.0"
+  }
+}
