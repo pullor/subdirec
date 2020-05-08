@@ -1,13 +1,16 @@
 {
   "name": "subdirec",
   "version": "1.0.2",
-  "description": "",
+  "description": "把命令下放到子级目录中执行",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
     "core"
+  ],
+  "keywords": [
+    "subdirec"
   ],
   "bin": {
     "subdirec": "core/subdir.js"
