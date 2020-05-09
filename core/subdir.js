@@ -1,19 +1,29 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const inquirer = require("inquirer");
 const tools = require('./tools');
 
-const execute = (list, command) => {
-  tools.dchalkGreen(`\n命令执行中请耐心等待...\n`);
-  list.forEach(path => {
-    exec(`${command};`, { cwd: path }, function(error, stdout, stderr){
-      if(error || stdout || stderr) tools.dchalkGreen(`\n目录：${path}`);
-      if(error) tools.dchalkRed(error);
-      if(stderr) tools.dchalkRed(stderr);
-      if(stdout) console.log(stdout);
+const dspawn = (path, command) => {
+  return new Promise((resolve, reject)=> {
+    tools.dchalkGreen(`\n目录：${path}`);
+    const subprocess = spawn(`${command};`,[], { cwd: path, shell: true });
+    subprocess.stdout.on('data', (data) => {
+      console.log(`${data}`)
+    });
+    subprocess.stderr.on('data', (data) => {
+      tools.dchalkRed(`${data}`);
+    });
+    subprocess.on('close', (code) => {
+      resolve(true)
     });
   })
+}
+
+const execute = async (list, command) => {
+  tools.dchalkGreen(`\n命令执行中请耐心等待...\n`);
+  let len = list.length;
+  while (len > 0 && await dspawn(list[len - 1], command)) len -= 1;
 }
 
 const askQuestions = () => {

@@ -1,6 +1,6 @@
 {
   "name": "subdirec",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "把命令下放到子级目录中执行",
   "main": "index.js",
   "scripts": {
